@@ -1,25 +1,20 @@
 import axios, { AxiosInstance, AxiosResponse, AxiosError } from 'axios';
 
-// The base URL for API
-const BASE_URL = 'https://api.astria.ai';
+const BASE_URL = 'https://5000-astriaai-imagine-t7a0u5m1trj.ws-eu116.gitpod.io';
 
-//custom Axios instance
 const apiClient: AxiosInstance = axios.create({
   baseURL: BASE_URL,
   headers: {
     'Content-Type': 'application/json',
-    Authorization: `Bearer ${import.meta.env.VITE_APP_ASTRIA_API_KEY}`,
   },
 });
 
-// Define your API response type
 interface ApiResponse<T> {
   data: T;
   status: number;
   statusText: string;
 }
 
-// Generic GET request
 export const get = async <T>(url: string, params?: object): Promise<ApiResponse<T>> => {
   try {
     const response: AxiosResponse<T> = await apiClient.get(url, { params });
@@ -34,7 +29,6 @@ export const get = async <T>(url: string, params?: object): Promise<ApiResponse<
   }
 };
 
-// Generic POST request
 export const post = async <T>(url: string, data: object): Promise<ApiResponse<T>> => {
   try {
     const response: AxiosResponse<T> = await apiClient.post(url, data);
@@ -49,7 +43,6 @@ export const post = async <T>(url: string, data: object): Promise<ApiResponse<T>
   }
 };
 
-// Error handling function
 const handleApiError = (error: AxiosError): void => {
   if (error.response) {
     console.error('API Error:', error.response.status, error.response.data);
@@ -60,5 +53,4 @@ const handleApiError = (error: AxiosError): void => {
   }
 };
 
-// Export the API client
 export { apiClient };

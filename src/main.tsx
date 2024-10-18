@@ -1,35 +1,31 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-import { Gallery, UsersPrompts, Prompt } from './pages';
-import './index.css';
-import { ThemeProvider } from "@/components/theme-provider"
+import { createRoot } from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Gallery, UsersPrompts, Prompt } from "./pages";
+import "./index.css";
+import { ThemeProvider } from "@/components/theme-provider";
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <UsersPrompts />,
+    },
+    {
+      path: "/gallery",
+      element: <Gallery />,
+    },
+    {
+      path: "/prompt/:id",
+      element: <Prompt />,
+    },
+  ],
   {
-    path: "/",
-    element:  <UsersPrompts />,
-  },
-  {
-    path: "/gallery",
-    element: <Gallery />,
-  },
-  {
-    path: "/prompt",
-    element: <Prompt />,
+    basename: "/imagine",
   }
-], {
-  basename: "/imagine"
-});
+);
 
-
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <ThemeProvider>
-      <RouterProvider router={router} />
-    </ThemeProvider>
-  </StrictMode>,
-)
+createRoot(document.getElementById("root")!).render(
+  <ThemeProvider>
+    <RouterProvider router={router} />
+  </ThemeProvider>
+);
