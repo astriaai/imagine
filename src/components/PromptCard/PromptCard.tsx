@@ -9,9 +9,10 @@ import usePromptPolling from "@/hooks/usePromptPolling";
 
 interface PromptCardProps {
   prompt: Prompt;
+  promptIndex: number;
 }
 
-const PromptCard: React.FC<PromptCardProps> = ({ prompt: initialPrompt }) => {
+const PromptCard: React.FC<PromptCardProps> = ({ prompt: initialPrompt, promptIndex }) => {
   const navigate = useNavigate();
   const { retrieveSinglePrompt, updateSinglePrompt } = useStore();
   const retrievedPrompt = usePromptPolling(initialPrompt, retrieveSinglePrompt, updateSinglePrompt);
@@ -22,16 +23,17 @@ const PromptCard: React.FC<PromptCardProps> = ({ prompt: initialPrompt }) => {
   };
 
   return (
-    <div className="mb-4 w-full cursor-pointer flex flex-col-reverse md:flex-row group">
+    <div className="relative mb-4 w-full cursor-pointer flex flex-col-reverse md:flex-row group">
       <ImageGrid images={displayPrompt.images} onClick={handleImageClick} />
-      <div className="md:w-[30%] p-2 flex flex-col text-sm text-black">
-        <div className="flex-1">
+      <div className="md:w-[30%] px-0 py-2 md:py-0 md:px-2 flex flex-col text-sm text-black">
+        <div className="flex-1 order-2 md:order-1">
           <p className="font-medium">
             {displayPrompt.text?.length > 100 ? `${displayPrompt.text.slice(0, 100)}...` : displayPrompt.text}
           </p>
           <PropertiesDisplay prompt={displayPrompt} />
         </div>
-        <div className="md:opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <div className="order-1 md:order-2 flex justify-between items-center md:opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <p className="font-medium block md:hidden">{promptIndex}</p>
           <ActionButtons prompt={displayPrompt} />
         </div>
       </div>

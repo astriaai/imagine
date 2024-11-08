@@ -38,9 +38,9 @@ export const getTunes = async (
   return response.data;
 };
 
-export const trashPrompt = async (promptId: number) => {
-  const response = await apiClient.delete(`/prompts/${promptId}`);
-  if (response.status === 200) {
-    return response.data;
+export const trashPrompt = async (tuneId:number, promptId: number) => {
+  const response = await apiClient.delete(`/tunes/${tuneId}/prompts/${promptId}`);
+  if (response.status === 204) {
+    return response.status;
   }
 };

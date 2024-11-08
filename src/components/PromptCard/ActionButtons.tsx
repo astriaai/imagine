@@ -26,7 +26,7 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({ prompt }) => {
         onClick={() => handleLike(prompt.id)}
         className="flex items-center gap-1"
       >
-        <Heart className={`w-4 h-4 text-red-600 ${isLiked ? "fill-current" : ""}`} />
+        <Heart className={`w-3 h-3 text-red-600 ${isLiked ? "fill-current" : ""}`} />
         <span className="hidden custom-lg:inline">{isLiked ? "Unlike" : "Like"}</span>
       </Button>
       <Button
@@ -35,20 +35,20 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({ prompt }) => {
         onClick={() => handleUsePrompt(prompt)}
         className="flex items-center gap-1"
       >
-        {isPromptUsed ? <Check className="w-4 h-4 text-green-600" /> : <Type className="w-4 h-4" />}
+        {isPromptUsed ? <Check className="w-3 h-3 text-green-600" /> : <Type className="w-3 h-3" />}
         <span className="hidden custom-lg:inline">Use</span>
       </Button>
       <Button
         variant="ghost"
         size="sm"
-        onClick={() => handleTrash(prompt.id)}
+        onClick={() => handleTrash(prompt.tune_id, prompt.id)}
         className="flex items-center gap-1"
       >
-        {isTrashed ? <Check className="w-4 h-4 text-green-600" /> : <Trash className="w-4 h-4" />}
+        {isTrashed ? <Check className="w-3 h-3 text-green-600" /> : <Trash className="w-3 h-3" />}
         <span className="hidden custom-lg:inline">{isTrashed ? "Trashed!" : "Trash"}</span>
       </Button>
       <Button variant="ghost" size="sm" onClick={() => handleCopy(prompt)} className="flex items-center gap-1">
-        {isCopied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+        {isCopied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
         <span className="hidden custom-lg:inline">{isCopied ? "Copied!" : "Copy"}</span>
       </Button>
     </div>

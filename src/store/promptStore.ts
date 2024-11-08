@@ -47,6 +47,12 @@ export const useStore = create<PromptsState>((set) => ({
     const prompt = await retrievePrompt(tuneId, promptId);
     return prompt;
   },
+  removeSinglePrompt: (promptId: number) => {
+    set((state) => {
+      const userPrompts = state.userPrompts.filter((p) => p.id !== promptId);
+      return { userPrompts };
+    });
+  },
 
   updateSinglePrompt: async (tuneId: number, promptId: number) => {
     // Update the prompt in the store

@@ -1,9 +1,6 @@
 import axios, { AxiosInstance, AxiosResponse, AxiosError } from 'axios';
 
-// Set base URL conditionally based on an environment variable
-const BASE_URL = process.env.USE_BASE_URL === 'true'
-  ? "https://redesigned-space-potato-qg9pj9g9g45299x5-5000.app.github.dev/"
-  : undefined;
+const BASE_URL = "https://redesigned-space-potato-qg9pj9g9g45299x5-5000.app.github.dev/"
 
 const apiClient: AxiosInstance = axios.create({
   baseURL: BASE_URL,
@@ -14,7 +11,7 @@ const apiClient: AxiosInstance = axios.create({
   },
 });
 
-// Multipart form data client
+// multipart form data api client2
 const apiClient2: AxiosInstance = axios.create({
   baseURL: BASE_URL,
   headers: {
@@ -30,7 +27,6 @@ interface ApiResponse<T> {
   statusText: string;
 }
 
-// GET request
 export const get = async <T>(url: string, params?: object): Promise<ApiResponse<T>> => {
   try {
     const response: AxiosResponse<T> = await apiClient.get(url, { params });
@@ -45,7 +41,6 @@ export const get = async <T>(url: string, params?: object): Promise<ApiResponse<
   }
 };
 
-// POST request
 export const post = async <T>(url: string, data: object): Promise<ApiResponse<T>> => {
   try {
     const response: AxiosResponse<T> = await apiClient.post(url, data);
@@ -60,7 +55,6 @@ export const post = async <T>(url: string, data: object): Promise<ApiResponse<T>
   }
 };
 
-// Error handler
 const handleApiError = (error: AxiosError): void => {
   if (error.response) {
     console.error('API Error:', error.response.status, error.response.data);
@@ -71,4 +65,4 @@ const handleApiError = (error: AxiosError): void => {
   }
 };
 
-export { apiClient, apiClient2 };
+export { apiClient, apiClient2 }; 

@@ -73,6 +73,7 @@ export interface PromptsState {
   refreshGalleryPrompts: () => Promise<void>;
   refreshUserPrompts: () => Promise<void>;
   retrieveSinglePrompt: (tuneId: number, promptId: number) => Promise<Prompt>;
+  removeSinglePrompt: (promptId: number) => void;
   updateSinglePrompt: (tuneId: number, promptId: number) => Promise<void>;
 }
 

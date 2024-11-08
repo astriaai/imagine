@@ -44,12 +44,12 @@ const UsersPrompts: React.FC = () => {
   };
 
   // Group prompts by date
-  const groupedPrompts = prompts.reduce((acc, prompt) => {
+  const groupedPrompts = prompts.reduce((acc, prompt, index) => {
     const dateHeader = formatDateHeader(prompt.created_at);
     if (!acc[dateHeader]) acc[dateHeader] = [];
-    acc[dateHeader].push(prompt);
+    acc[dateHeader].push({ ...prompt, originalIndex: index });
     return acc;
-  }, {} as Record<string, typeof prompts>);
+  }, {} as Record<string, (typeof prompts[0] & { originalIndex: number })[]>);
 
   return (
     <div className="flex-1 relative">
@@ -75,9 +75,9 @@ const UsersPrompts: React.FC = () => {
                 {groupedPrompts.map((prompt, index) => (
                   <div
                     key={prompt.id || index}
-                    ref={index === prompts.length - 1 ? lastPromptElementRef : null}
+                    ref={prompt.originalIndex === prompts.length - 1 ? lastPromptElementRef : null}
                   >
-                    <PromptCard prompt={prompt} />
+                    <PromptCard prompt={prompt} promptIndex={prompt.originalIndex + 1} />
                   </div>
                 ))}
               </React.Fragment>
