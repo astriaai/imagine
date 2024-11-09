@@ -19,7 +19,7 @@ const PromptCard: React.FC<PromptCardProps> = ({ prompt: initialPrompt, promptIn
   const displayPrompt = retrievedPrompt || initialPrompt;
 
   const handleImageClick = (index: number) => {
-    navigate(`/prompt/${displayPrompt.id}`, { state: { type: "user", index } });
+    navigate(`/prompt/${displayPrompt.id}/${index}`, { state: { type: "user" } });
   };
 
   return (

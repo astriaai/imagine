@@ -9,7 +9,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { format, isToday, isYesterday, parseISO } from "date-fns";
 
 const UsersPrompts: React.FC = () => {
-  const { prompts, fetchMoreData } = usePrompts(false);
+  const { userPrompts, fetchMoreData } = usePrompts();
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -19,7 +19,7 @@ const UsersPrompts: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
-      const hasMoreData = await fetchMoreData();
+      const hasMoreData = await fetchMoreData(false);
       setHasMore(hasMoreData);
     } catch (e) {
       setError("An error occurred while loading more prompts. Please try again.");
@@ -44,19 +44,19 @@ const UsersPrompts: React.FC = () => {
   };
 
   // Group prompts by date
-  const groupedPrompts = prompts.reduce((acc, prompt, index) => {
+  const groupedPrompts = userPrompts.reduce((acc, prompt, index) => {
     const dateHeader = formatDateHeader(prompt.created_at);
     if (!acc[dateHeader]) acc[dateHeader] = [];
     acc[dateHeader].push({ ...prompt, originalIndex: index });
     return acc;
-  }, {} as Record<string, (typeof prompts[0] & { originalIndex: number })[]>);
+  }, {} as Record<string, (typeof userPrompts[0] & { originalIndex: number })[]>);
 
   return (
     <div className="flex-1 relative">
       <PromptForm />
       <div className="mx-auto overflow-hidden px-4">
         <InfiniteScroll
-          dataLength={prompts.length}
+          dataLength={userPrompts.length}
           next={loadMorePrompts}
           hasMore={hasMore}
           loader={<Loader2 className="mx-auto animate-spin" />}
@@ -75,7 +75,7 @@ const UsersPrompts: React.FC = () => {
                 {groupedPrompts.map((prompt, index) => (
                   <div
                     key={prompt.id || index}
-                    ref={prompt.originalIndex === prompts.length - 1 ? lastPromptElementRef : null}
+                    ref={prompt.originalIndex === userPrompts.length - 1 ? lastPromptElementRef : null}
                   >
                     <PromptCard prompt={prompt} promptIndex={prompt.originalIndex + 1} />
                   </div>

@@ -5,12 +5,12 @@ import MasonryGallery from "@/components/Gallery";
 import usePrompts from "@/hooks/usePrompts";
 
 const Gallery: React.FC = () => {
-  const { prompts, fetchMoreData } = usePrompts(true);
+  const { galleryPrompts, fetchMoreData } = usePrompts();
 
   return (
     <div className="flex-1 relative">
       <PromptForm />
-      <MasonryGallery prompts={prompts} fetchMoreData={fetchMoreData} />
+      <MasonryGallery prompts={galleryPrompts} fetchMoreData={() => fetchMoreData(true)} />
     </div>
   );
 };

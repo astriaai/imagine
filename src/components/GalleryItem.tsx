@@ -36,7 +36,7 @@ const GalleryItem: React.FC<GalleryItemProps> = ({ prompt, index }) => {
       key={prompt.id}
       className="mb-[2px] cursor-pointer"
       onClick={() =>
-        navigate(`/prompt/${prompt.id}`, { state: { type: "gallery", index: 0 } })
+        navigate(`/prompt/${prompt.id}/0`, { state: { type: "gallery" } })
       }
     >
       <div className="relative group">

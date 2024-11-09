@@ -35,7 +35,7 @@ const PromptDetails: React.FC<PromptDetailsProps> = ({ prompt, imageUrl }) => {
   };
 
   return (
-    <div className="hidden md:w-1/3 h-full md:flex flex-col justify-between rounded-xl p-4 shadow-lg bg-white">
+    <div className="hidden md:w-2/5 lg:w-1/3 h-full md:flex flex-col justify-between rounded-xl p-4 shadow-lg bg-white">
       <div>
         <div className="flex mb-2 justify-between items-center">
           <h2 className="text-lg font-semibold">{prompt?.id}</h2>
@@ -81,7 +81,7 @@ const PromptDetails: React.FC<PromptDetailsProps> = ({ prompt, imageUrl }) => {
           </div>
         </div>
         <p className="overflow-y-auto max-h-48 text-sm text-gray-700">
-          {prompt?.text.length > 100 ? `${prompt?.text.slice(0, 200)}...` : prompt?.text}
+          {prompt?.text?.length > 100 ? `${prompt?.text.slice(0, 200)}...` : prompt?.text}
         </p>
       </div>
       <div className="flex justify-center p-2 mt-2">

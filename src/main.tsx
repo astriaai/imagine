@@ -15,7 +15,7 @@ const router = createHashRouter(
       element: <Gallery />,
     },
     {
-      path: "/prompt/:id",
+      path: "/prompt/:id/:index",
       element: <Prompt />,
     },
   ]
